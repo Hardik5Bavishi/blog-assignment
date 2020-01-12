@@ -1,0 +1,16 @@
+<div class="container" fxLayout="column">
+    <div fxLayoutAlign="end">
+        <button mat-raised-button color="accent" (click)="create()">Create a Blog</button>
+    </div>
+    <div *ngIf="blogs.length > 0;else no_blogs">
+        <ng-container *ngFor="let blog of blogs">
+            <app-blog [blog]="blog" [isMyBlog]="'true'" (onEditBlog)="editBlog($event)"
+                (onDeleteBlog)="deleteBlog($event)" fxFlex></app-blog>
+        </ng-container>
+    </div>
+    <ng-template #no_blogs>
+        <div fxLayoutAlign="center center">
+            You have no blogs
+        </div>
+    </ng-template>
+</div>

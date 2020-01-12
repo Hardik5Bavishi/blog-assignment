@@ -1,0 +1,22 @@
+<div class="container" fxLayout="column" fxFlex fxLayoutAlign="center center">
+    <mat-form-field class="w-30-p" appearance="outline">
+        <mat-label>Name</mat-label>
+        <input [(ngModel)]="user.name" matInput placeholder="Name">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+    <mat-form-field class="w-30-p" appearance="outline">
+        <mat-label>Avatar</mat-label>
+        <input [(ngModel)]="user.avatar" matInput placeholder="Avatar">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint><strong>Note* : </strong> Please use extrenal avatar url</mat-hint>
+    </mat-form-field>
+    <mat-form-field class="w-30-p" appearance="outline">
+        <mat-label>Username</mat-label>
+        <input [(ngModel)]="user.username" matInput placeholder="Username">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+    <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="center center">
+        <button mat-raised-button color="accent" (click)="updateUser()">Update</button>
+        <button mat-raised-button color="warn" (click)="deleteUser()">Delete My Account</button>
+    </div>
+</div>

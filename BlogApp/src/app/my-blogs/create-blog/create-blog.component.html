@@ -1,0 +1,39 @@
+<div fxLayout="column">
+    <div class="row" fxLayoutGap="16px">
+        <mat-form-field fxFlex appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="blog.name" name="name" placeholder="Name">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+        <mat-form-field fxFlex appearance="outline">
+            <mat-label>Avatar</mat-label>
+            <input matInput [(ngModel)]="blog.avatar" name="avatar" placeholder="Avatar">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint><strong>Note* : </strong> Please use external avatar url</mat-hint>
+        </mat-form-field>
+    </div>
+    <div class="row" fxLayoutGap="16px">
+        <mat-form-field fxFlex appearance="outline">
+            <mat-label>Description</mat-label>
+            <input matInput [(ngModel)]="blog.description" name="description" placeholder="Description">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+        <mat-form-field fxFlex appearance="outline">
+            <mat-label>Blog Image</mat-label>
+            <input matInput [(ngModel)]="blog.blogImage" name="blogImage" placeholder="Blog Image">
+            <mat-icon matSuffix>vpn_key</mat-icon>
+            <mat-hint><strong>Note* : </strong> Please use external image url</mat-hint>
+        </mat-form-field>
+    </div>
+    <div class="row" fxLayoutGap="16px">
+        <mat-form-field fxFlex appearance="outline">
+            <mat-label>Tags</mat-label>
+            <input matInput [(ngModel)]="blog.tags" name="tag" placeholder="Tags">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="center center">
+        <button mat-raised-button color="accent" (click)="save()">Save</button>
+        <button mat-raised-button (click)="cancel()">cancel</button>
+    </div>
+</div>

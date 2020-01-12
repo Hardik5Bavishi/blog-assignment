@@ -1,0 +1,37 @@
+.router-link-active {
+  color: white;
+  font-weight: 500;
+  background-color: rgb(41, 41, 41);
+}
+
+.header {
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(17, 130, 206);
+  color: white;
+  padding: 16px;
+}
+.container {
+  position: absolute;
+  height: 100%;
+  top: 0px;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+}
+
+.h-100-p {
+  height: calc(100% - 68px) !important;
+  overflow-y: scroll;
+}
+
+.p-16 {
+  padding: 16px !important;
+}
+
+.avatar {
+  border-radius: 100px;
+  width: 40px;
+  height: 40px;
+}

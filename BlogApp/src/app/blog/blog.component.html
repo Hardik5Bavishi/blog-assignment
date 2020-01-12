@@ -1,0 +1,76 @@
+<div class="card">
+    <div class="card-preview">
+        <div class="test-card">
+            <div class="p-16" fxLayout="row" fxLayoutAlign="space-between center">
+                <div fxLayout="row" fxLayoutGap="16px">
+                    <img class="w-40 h-40 border-radius" (error)="setBlogDefaultAvatar()" [src]="blog.avatar">
+                    <div class="ml-16">
+                        <div class="text-bold">
+                            {{blog.username}}
+                        </div>
+                        <div class="secondary-text">
+                            {{blog.createdAt}}
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="isMyBlog">
+                    <button mat-button [matMenuTriggerFor]="menu">
+                        <mat-icon mat-icon-button>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="edit()">
+                            <mat-icon>edit</mat-icon>
+                            <span>Edit</span>
+                        </button>
+                        <button mat-menu-item (click)="delete()">
+                            <mat-icon>delete</mat-icon>
+                            <span>Delete </span>
+                        </button>
+                    </mat-menu>
+                </div>
+            </div>
+            <img style="width: 100%;" [src]="blog.blogImage" (error)="setDefaultPic()" alt="{{blog.blogImage}}">
+            <div class="px-16 title">
+                {{blog.name}}
+            </div>
+            <div class="p-16">
+                {{blog.description}}
+            </div>
+            <mat-divider></mat-divider>
+            <ng-container *ngFor="let comment of comments;let i = index">
+                <div class="p-16" fxLayoutGap="16px" fxLayoutAlign="start center" fxLayout="row">
+                    <img class="w-40 h-40 border-radius" (error)="setCommentDefaultAvatar(index)"
+                        [src]="comment.avatar">
+                    <div fxLayout="column" fxLayoutGap="4px" fxFlex>
+                        <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+                            <div class="text-bold">
+                                {{comment.name}}
+                            </div>
+                            <div class="secondary-text">
+                                {{comment.createdAt}}
+                            </div>
+                            <div *ngIf="comment.userId == userId" fxLayoutAlign="end">
+                                <mat-icon class="test" (click)="deleteComment(comment.userId, comment.blogId, comment.id)">delete</mat-icon>
+                            </div>
+                        </div>
+                        <div class="message">
+                            {{comment.comment}}
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <div *ngIf="isLoggedInUser" class="p-16" fxLayoutGap="16px" fxLayoutAlign="start start" fxLayout="row">
+                <img class="w-40 h-40 border-radius" (error)="setUserDefaultAvatar()" [src]="loggedInUserAvatar"
+                    (error)="setDefaultAvatar()">
+                <div fxLayout="column" fxFlex>
+                    <mat-form-field appearance="outline">
+                        <textarea matInput [(ngModel)]="commentObj.comment" placeholder="Comment"></textarea>
+                    </mat-form-field>
+                    <div>
+                        <button mat-raised-button color="accent" (click)="postComment()">Post Comment</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
