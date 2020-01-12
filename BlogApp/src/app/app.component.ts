@@ -11,7 +11,7 @@ import { CommonService } from './services/common.service';
 export class AppComponent implements OnInit {
 
   title = 'BlogApp';
-  isNotLoggedIn: boolean = true;
+  isLoggedIn: boolean;
   username: string;
   userAvatar: string;
 
@@ -21,12 +21,12 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     if (this._commonService.getUserId()) {
-      this.isNotLoggedIn = false;
+      this.isLoggedIn = true;
       this.username = this._commonService.getUsername();
       this.userAvatar = this._commonService.getAvatar();
     }
     this._commonService._subject.subscribe(res => {
-      this.isNotLoggedIn = true;
+      this.isLoggedIn = res;
     });
   }
 
@@ -36,19 +36,20 @@ export class AppComponent implements OnInit {
     });
 
     dialogRef.componentInstance.loggedIn.subscribe(res => {
+      debugger;
       this._commonService.setUserId(res.id);
       this._commonService.setUsername(res.username);
       this._commonService.setAvatar(res.avatar);
       this.userAvatar = res.avatar;
       this.username = res.username;
-      this.isNotLoggedIn = false;
+      this.isLoggedIn = true;
       this._commonService.onLogin();
     });
   }
 
   logout(): void {
     this._commonService.logout();
-    this.isNotLoggedIn = true;
+    this.isLoggedIn = false;
   }
 
   setUserDefaultAvatar(): void {

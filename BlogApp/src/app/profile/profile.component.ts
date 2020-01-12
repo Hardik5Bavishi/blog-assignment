@@ -5,6 +5,7 @@ import { CommonService } from '../services/common.service';
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { AlertService } from '../services/alert.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -16,17 +17,23 @@ export class ProfileComponent implements OnInit {
   user: User;
   userId: number;
   confirmDialogRef: MatDialogRef<ConfirmDialogComponent>;
+  form: FormGroup;
 
   constructor(private profileService: ProfileService,
     private _dialog: MatDialog,
-    private commonService: CommonService,
+    private _formBuilder: FormBuilder,
+    private _commonService: CommonService,
     private _alertService: AlertService) {
-    this.userId = this.commonService.getUserId();
+    this.userId = this._commonService.getUserId();
   }
 
   ngOnInit() {
     this.user = new User();
     this.getUserInfo();
+    this.form = this._formBuilder.group({
+      username: ['', Validators.required],
+      name: ['', Validators.required],
+    });
   }
 
   getUserInfo(): void {
@@ -52,7 +59,7 @@ export class ProfileComponent implements OnInit {
     this.confirmDialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.profileService.deleteUser(this.userId).subscribe(res => {
-          this.commonService.logout();
+          this._commonService.logout();
           this._alertService.success('Profile delete successfully.');
         },
           (error) => {

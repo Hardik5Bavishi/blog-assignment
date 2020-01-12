@@ -2,6 +2,9 @@
     <div fxLayoutAlign="end">
         <button mat-raised-button color="accent" (click)="create()">Create a Blog</button>
     </div>
+    <div class="divider">
+        <mat-divider></mat-divider>
+    </div>
     <div *ngIf="blogs.length > 0;else no_blogs">
         <ng-container *ngFor="let blog of blogs">
             <app-blog [blog]="blog" [isMyBlog]="'true'" (onEditBlog)="editBlog($event)"
@@ -9,8 +12,8 @@
         </ng-container>
     </div>
     <ng-template #no_blogs>
-        <div fxLayoutAlign="center center">
-            You have no blogs
+        <div class="message-box warning">
+            There is no blogs created by you.
         </div>
     </ng-template>
 </div>

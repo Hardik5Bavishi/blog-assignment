@@ -75,7 +75,6 @@ export class BlogComponent implements OnInit {
     this.commentObj.userId = this.userId;
     this.commentObj.name = this._commonService.getUsername();
     this._commentService.postComment(this.commentObj).subscribe(res => {
-      alert(`${this.userId} - ${res.userId}`);
       this.comments.push(res);
       this._alertService.success('Comment added successfully');
       this.commentObj = new Comment();

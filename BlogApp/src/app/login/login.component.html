@@ -1,49 +1,63 @@
-<div *ngIf="isLogin;else sign_up" fxLayout="column">
-    <label *ngIf="signedUp">Account has been created successfully. Please LogIn</label>
-    <mat-form-field appearance="outline">
-        <mat-label>Username</mat-label>
-        <input matInput [(ngModel)]="userLoginObj.username" placeholder="Username">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-        <mat-label>Password</mat-label>
-        <input type="password" [(ngModel)]="userLoginObj.password" matInput placeholder="Password">
-        <mat-icon matSuffix>vpn_key</mat-icon>
-    </mat-form-field>
-    <mat-error *ngIf="inValidUsername">Invalid username or password.
-        <div>Note: username and password are case sensitive.</div>
-    </mat-error>
-    <button mat-raised-button color="accent" (click)="login()">Login</button>
-    <label fxLayoutAlign="start center">No account? <a mat-button (click)="signUp()"><strong> Create one </strong> </a>
+<div *ngIf="isLogin;else sign_up">
+    <h3>Login here!</h3>
+    <form fxLayout="column" name="loginForm" [formGroup]="loginForm">
+        <label *ngIf="signedUp">Account has been created successfully. Please LogIn</label>
+        <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput [(ngModel)]="userLoginObj.username" formControlName="username" placeholder="Username">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-error>Username is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input type="password" [(ngModel)]="userLoginObj.password" formControlName="password" matInput
+                placeholder="Password">
+            <mat-icon matSuffix>vpn_key</mat-icon>
+            <mat-error>Password is required</mat-error>
+        </mat-form-field>
+        <mat-error *ngIf="inValidUsername">Invalid username or password.
+            <div>Note: username and password are case sensitive.</div>
+        </mat-error>
+    </form>
+    <button mat-raised-button color="accent" [disabled]="loginForm.invalid" (click)="login()">Login</button>
+    <label fxLayoutAlign="start center">No account? <a mat-button (click)="signUp()"><strong> Create one </strong>
+        </a>
     </label>
 </div>
 
 <ng-template #sign_up>
-    <div fxLayout="column">
+    <h3>Register your account here!</h3>
+    <form fxLayout="column" name="signUpForm" [formGroup]="signUpForm">
         <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
-            <input [(ngModel)]="userRegisterObj.name" matInput placeholder="Name">
+            <input [(ngModel)]="userRegisterObj.name" formControlName="name" matInput placeholder="Name">
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-error>Name is required</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Avatar</mat-label>
-            <input [(ngModel)]="userRegisterObj.avatar" matInput placeholder="Avatar">
+            <input [(ngModel)]="userRegisterObj.avatar" [ngModelOptions]="{standalone: true}" matInput
+                placeholder="Avatar">
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
             <mat-hint><strong>Note* : </strong> Please use extrenal avatar url</mat-hint>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Username</mat-label>
-            <input [(ngModel)]="userRegisterObj.username" matInput placeholder="Username">
+            <input [(ngModel)]="userRegisterObj.username" formControlName="username" matInput placeholder="Username">
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-error>Username is required</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
-            <input [(ngModel)]="userRegisterObj.password" type="password" matInput placeholder="Password">
+            <input [(ngModel)]="userRegisterObj.password" formControlName="password" type="password" matInput
+                placeholder="Password">
             <mat-icon matSuffix>vpn_key</mat-icon>
+            <mat-error>Password is required</mat-error>
         </mat-form-field>
-        <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="center center">
-            <button mat-raised-button color="accent" (click)="register()">Register</button>
-            <button mat-raised-button (click)="cancel()">cancel</button>
-        </div>
+    </form>
+    <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="center center">
+        <button mat-raised-button color="accent" [disabled]="signUpForm.invalid" (click)="register()">Register</button>
+        <button mat-raised-button (click)="cancel()">cancel</button>
     </div>
+
 </ng-template>

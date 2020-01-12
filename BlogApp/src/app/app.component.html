@@ -2,9 +2,9 @@
   <div fxLayoutAlign="space-between center" class="header">
     <div>
       <a mat-button routerLink='/home' routerLinkActive="router-link-active">Home</a>
-      <a *ngIf="!isNotLoggedIn" mat-button routerLink='/my-blogs' routerLinkActive="router-link-active">My Blogs</a>
+      <a *ngIf="isLoggedIn" mat-button routerLink='/my-blogs' routerLinkActive="router-link-active">My Blogs</a>
     </div>
-    <div *ngIf="isNotLoggedIn; else is_logged_in">
+    <div *ngIf="!isLoggedIn; else is_logged_in">
       <a mat-button (click)="login()">Login</a>
     </div>
     <ng-template #is_logged_in>

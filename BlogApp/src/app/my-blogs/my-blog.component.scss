@@ -1,3 +1,19 @@
 .container {
     padding: 16px;
+    .divider {
+        padding: 16px 0;
+    }
+}
+
+.message-box {
+    padding: 16px;
+    background: #607D8B;
+    border-left: 6px solid #37474F;
+    color: rgba(255, 255, 255, 1);
+
+    &.warning {
+        background: #FFECB3;
+        border-left-color: #FFC107;
+        color: rgba(0, 0, 0, 0.87);
+    }
 }

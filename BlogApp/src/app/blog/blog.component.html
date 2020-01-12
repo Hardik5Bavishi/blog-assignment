@@ -1,15 +1,15 @@
 <div class="card">
     <div class="card-preview">
-        <div class="test-card">
+        <div class="card-detail">
             <div class="p-16" fxLayout="row" fxLayoutAlign="space-between center">
                 <div fxLayout="row" fxLayoutGap="16px">
-                    <img class="w-40 h-40 border-radius" (error)="setBlogDefaultAvatar()" [src]="blog.avatar">
+                    <img class="border-radius" (error)="setBlogDefaultAvatar()" [src]="blog.avatar">
                     <div class="ml-16">
                         <div class="text-bold">
                             {{blog.username}}
                         </div>
                         <div class="secondary-text">
-                            {{blog.createdAt}}
+                            {{blog.createdAt | date : 'short'}}
                         </div>
                     </div>
                 </div>
@@ -30,7 +30,12 @@
                 </div>
             </div>
             <img style="width: 100%;" [src]="blog.blogImage" (error)="setDefaultPic()" alt="{{blog.blogImage}}">
-            <div class="px-16 title">
+            <div class="p-16" fxLayoutAlign="start center" fxLayoutGap="4px">
+                <mat-icon>thumb_up</mat-icon>
+                <label>{{blog.likes}}</label>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="title">
                 {{blog.name}}
             </div>
             <div class="p-16">
@@ -39,18 +44,19 @@
             <mat-divider></mat-divider>
             <ng-container *ngFor="let comment of comments;let i = index">
                 <div class="p-16" fxLayoutGap="16px" fxLayoutAlign="start center" fxLayout="row">
-                    <img class="w-40 h-40 border-radius" (error)="setCommentDefaultAvatar(index)"
-                        [src]="comment.avatar">
+                    <img class="border-radius" (error)="setCommentDefaultAvatar(index)" [src]="comment.avatar">
                     <div fxLayout="column" fxLayoutGap="4px" fxFlex>
-                        <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+                        <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="space-between center">
                             <div class="text-bold">
                                 {{comment.name}}
                             </div>
                             <div class="secondary-text">
-                                {{comment.createdAt}}
+                                {{comment.createdAt | date : 'short'}}
                             </div>
                             <div *ngIf="comment.userId == userId" fxLayoutAlign="end">
-                                <mat-icon class="test" (click)="deleteComment(comment.userId, comment.blogId, comment.id)">delete</mat-icon>
+                                <mat-icon class="pointer"
+                                    (click)="deleteComment(comment.userId, comment.blogId, comment.id)">delete
+                                </mat-icon>
                             </div>
                         </div>
                         <div class="message">
@@ -60,11 +66,12 @@
                 </div>
             </ng-container>
             <div *ngIf="isLoggedInUser" class="p-16" fxLayoutGap="16px" fxLayoutAlign="start start" fxLayout="row">
-                <img class="w-40 h-40 border-radius" (error)="setUserDefaultAvatar()" [src]="loggedInUserAvatar"
-                    (error)="setDefaultAvatar()">
+                <img class="border-radius" (error)="setUserDefaultAvatar()" [src]="loggedInUserAvatar"
+                    (error)="setUserDefaultAvatar()">
                 <div fxLayout="column" fxFlex>
                     <mat-form-field appearance="outline">
-                        <textarea matInput [(ngModel)]="commentObj.comment" placeholder="Comment"></textarea>
+                        <textarea matInput [(ngModel)]="commentObj.comment"
+                            placeholder="Add comment here..."></textarea>
                     </mat-form-field>
                     <div>
                         <button mat-raised-button color="accent" (click)="postComment()">Post Comment</button>

@@ -2,16 +2,37 @@
   display: flex;
   align-items: flex-start;
   padding: 24px;
+
   .card-preview {
     display: flex;
     min-width: 320px;
+    max-width: 320px;
+
+    .card-detail {
+      max-width: 100% !important;
+      min-width: 100% !important;
+      border-radius: 8px;
+      border: 1px solid rgb(197, 195, 195);
+
+      .ml-16 {
+        margin-left: 16px;
+      }
+
+      .message {
+        font-size: 14px;
+        color: rgb(77, 76, 76);
+      }
+    }
   }
+
   .border-radius {
     border-radius: 100px;
+    width: 40px;
+    height: 40px;
   }
 
   .text-bold {
-    font-weight: 700;
+    font-weight: 500;
   }
 
   .secondary-text {
@@ -19,45 +40,31 @@
     font-size: small;
     font-weight: 500;
   }
-
-  .test-card {
-    max-width: 100% !important;
-    min-width: 100% !important;
-    border-radius: 8px;
-    border: 1px solid rgb(197, 195, 195);
-    .w-40 {
-      width: 40px;
-    }
-
-    .h-40 {
-      height: 40px;
-    }
-
-    .message {
-      font-size: 14px;
-      color: rgb(77, 76, 76);
-    }
-  }
 }
 
 .p-16 {
   padding: 16px !important;
 }
 
-.ml {
-  margin-left: 16px;
-}
-
-.px-16 {
-  padding: 0 16px;
-}
-
 .title {
   font-size: 18px;
   font-weight: 500;
-  padding-top: 16px;
+  padding: 16px 16px 0;
 }
 
-.test {
+.pointer {
   cursor: pointer;
+}
+
+.message-box {
+  padding: 16px;
+  background: #607d8b;
+  border-left: 6px solid #37474f;
+  color: rgba(255, 255, 255, 1);
+
+  &.warning {
+    background: #ffecb3;
+    border-left-color: #ffc107;
+    color: rgba(0, 0, 0, 0.87);
+  }
 }
